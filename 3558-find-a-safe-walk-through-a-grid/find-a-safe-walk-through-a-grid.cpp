@@ -14,11 +14,11 @@ public:
 
         dp[0][0] = h;
 
-        queue<tup> q;
+        priority_queue<tup,vector<tup>,greater<tup>> q;
         q.push({0,0,h});
 
         while(!q.empty()){
-            auto [i,j,h] = q.front();
+            auto [i,j,h] = q.top();
             q.pop();
 
             //cout<<i<<" "<<j<<" "<<h<<endl;
