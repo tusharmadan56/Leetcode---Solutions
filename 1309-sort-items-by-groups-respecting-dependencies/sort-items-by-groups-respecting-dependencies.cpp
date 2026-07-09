@@ -13,7 +13,7 @@ public:
             }
         }
 
-        vector<unordered_set<int>> ng(it);
+        vector<vector<int>> ng(it);
         vector<int> in2(it,0);
 
         for(int i=0;i<n;i++){
@@ -24,10 +24,10 @@ public:
                 int a = group[bef[i][j]];
                 int b = group[i];
                 if(a==b) continue;
-                if(ng[a].find(group[i])==ng[a].end()){
-                    ng[a].insert(group[i]);
+                
+                    ng[a].push_back(group[i]);
                     in2[group[i]]++;
-                }
+                
                 
             }
            // gr[group[i]]++;
