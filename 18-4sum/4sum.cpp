@@ -1,50 +1,45 @@
 class Solution {
 public:
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        int n = nums.size();
-
+    vector<vector<int>> fourSum(vector<int>& nums, int tar) {
+        int n  = nums.size();
+        vector<vector<int>> fans ;
 
         sort(nums.begin(),nums.end());
-        vector<vector<int>> fans;
 
-        for(int i=0;i<n-3;i++){
-            int a = nums[i];
+        for(int j=0;j<n-3;j++){
+            if(j>0 && nums[j]==nums[j-1]) continue;
+        for(int i=j+1;i<n-2;i++){
+            if(i>j+1 && nums[i]==nums[i-1]) continue;
 
-            if(i>0 && nums[i]==nums[i-1]) continue;
+            int l = i+1,r=n-1;
 
+            long long  target  = 0LL+tar-nums[i]-nums[j];
+            //cout<<target<<endl;
 
-            for(int j=i+1;j<n-2;j++){
-                int b = nums[j];
+            while(l<r){
+                long long  sum = 0LL+ nums[l]+nums[r];
 
-                if(j>i+1 && nums[j]==nums[j-1]) continue;
+                if(sum==target){
+                    fans.push_back({nums[j],nums[i],nums[l],nums[r]});
+                    l++;
+                    r--;
 
-                int l = j+1;
-                int r = n-1;
-
-                long long  val = 0LL+target - a - b;
-
-                while(l<r){
-                    long long  gg = 0LL+ nums[l]+nums[r];
-
-                    if(gg==val){
-                        fans.push_back({a,b,nums[l],nums[r]});
-                        l++;
-                        r--;
-
-                        while(l<n && nums[l]==nums[l-1]) l++;
-                        while(r>=0 && nums[r]==nums[r+1]) r--;
-                    }
-                    else if(gg>val){
-                        r--;
-                    }
-                    else{
+                    while(l<n && nums[l]==nums[l-1]){
                         l++;
                     }
-                    
+                    while(r>=0 && nums[r]==nums[r+1]){
+                        r--;
+                    }
                 }
-            }
+                else if(sum<target){
+                    l++;
+                }
+                else{
+                    r--;
+                }
 
-            
+            }
+        }
         }
         return fans;
     }
