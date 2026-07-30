@@ -31,8 +31,28 @@ public:
     int numTilings(int n) {
         this->n = n;
 
-        dp.resize(n,vector<int>(2,-1));
+        dp.resize(n+3,vector<int>(2,0));
 
-        return dfs(0,false);
+
+        dp[n][0] = 1;
+
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<2;j++){
+                long long ans = 0;
+                if(j){
+                    ans = (ans + dp[i+1][1])%mod;
+                    ans = (ans+dp[i+2][0])%mod;
+
+                }
+                else{
+                    ans = (ans + dp[i+1][0])%mod;
+                    ans=(ans +  dp[i+2][0])%mod;
+                    ans =(ans +  2LL * dp[i+1][1])%mod;
+                }
+                dp[i][j] = ans;
+            }
+        }
+
+        return dp[0][0];
     }
 };
