@@ -18,7 +18,21 @@ public:
     }
     int minInsertions(string s) {
         int n = s.size();
-        dp.resize(n,vector<int>(n,-1));
-        return dfs(0,n-1,s);
+        dp.resize(n+1,vector<int>(n+1,0));
+
+
+        for(int i=n-1;i>=0;i--){
+            for(int j=i+1;j<n;j++){
+                if(s[i]==s[j]){
+                    if(j-1>0) dp[i][j] = dp[i+1][j-1];
+                }
+                else{
+                    dp[i][j] = 1+dp[i+1][j];
+                    if(j-1>0) dp[i][j] = min(dp[i][j],1+dp[i][j-1]);
+                }
+            }
+        }
+        
+        return dp[0][n-1];
     }
 };
