@@ -2,7 +2,7 @@
 
 
 with cte as (
-    select * , if(order_date = customer_pref_delivery_date , 1 , 0) as ok from delivery d where order_date = (
+    select  if(order_date = customer_pref_delivery_date , 1 , 0) as ok from delivery d where order_date = (
         select min(order_date) from delivery d2 where d2.customer_id = d.customer_id
     )   
 )
