@@ -2,8 +2,8 @@
 
 
 with cte as (
-    select *   from products p1 where change_date = (
-        select max(change_date) from products p2 where p2.product_id = p1.product_id and p2.change_date <= '2019-08-16'
+    select *   from products p1 where (p1.product_id,change_date) in (
+        select p2.product_id , max(p2.change_date) from products p2 where p2.change_date <= '2019-08-16' group by p2.product_id
     )
 ),
 
