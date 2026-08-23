@@ -1,5 +1,10 @@
 # Write your MySQL query statement below
 
-select q1.person_name   from queue q1 join queue q2 on q1.turn>=q2.turn group by q1.person_id , q1.person_name ,  q1.turn having sum(q2.weight) <=1000 order by sum(q2.weight) desc limit 1;
+
+with cte as (select * , sum(weight) over(
+    order by turn
+) as tot
+from queue)
 
 
+select person_name from cte where tot<=1000 order by tot desc limit 1;
