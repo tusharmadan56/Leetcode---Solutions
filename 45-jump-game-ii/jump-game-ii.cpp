@@ -1,24 +1,20 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        int steps = 0,max = 1;
-
+        int ans = 0;
+        int curr = 0;
+        int lol = 0;
         int n = nums.size();
 
-        vector<int> v(n,1e9);
-        v[0] = 0;
+        for(int i=0;i<n-1;i++){
+            lol = max(lol , nums[i]+i);
 
-        
-
-        for(int i=0;i<(int)nums.size();i++){
-            int val = nums[i]+i;
-            while(max<n && max<=val){
-                v[max] = v[i]+1;
-                max++;
+            if(curr == i){
+                ans++;
+                curr = lol;
             }
-
         }
 
-        return v[n-1];
+        return ans;
     }
 };
