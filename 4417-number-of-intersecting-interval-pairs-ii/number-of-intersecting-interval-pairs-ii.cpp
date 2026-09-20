@@ -3,12 +3,13 @@ public:
     #define ll long long 
     long long countIntersectingIntervals(vector<vector<int>>& intervals) {
         vector<int> v;
+        sort(intervals.begin(),intervals.end());
         for(auto &temp:intervals){
             v.push_back(temp[0]);
         }
 
-        sort(v.begin(),v.end());
-        sort(intervals.begin(),intervals.end());
+        //sort(v.begin(),v.end());
+        
 
         ll fans = 0;
 
